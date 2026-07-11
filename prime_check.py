@@ -1,6 +1,8 @@
+import math
+
 def IsPrime(n):
     threshold = (n**(1/2))
-    if threshold // 1 == threshold:
+    if threshold**2 == n:
         return False
     threshold = threshold // 1
     checks = [2,3]
@@ -15,6 +17,8 @@ def IsPrime(n):
         else:
             break
         k += 1
+    print(threshold)
+    print(checks)
     for num in checks:
         if n % num == 0:
             return False
