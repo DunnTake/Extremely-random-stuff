@@ -1,5 +1,8 @@
 Python/__pycache__/
 Python/dist
+Python/build
+*.spec
 .vscode
-C/*.exe
+*.exe
 C/build
+cookie

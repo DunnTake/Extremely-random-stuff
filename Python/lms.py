@@ -1,4 +1,14 @@
 from playwright.sync_api import sync_playwright
+import os
+import sys
+import time
+from pathlib import Path
+
+if getattr(sys, "frozen", False):
+    os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(
+        Path(sys._MEIPASS) / "ms-playwright"
+    )
+
 import time
 chapt = ["Bài giảng 1: Công tác sinh viên",
          "Bài giảng 2: Quy định đào tạo tín chỉ",
@@ -27,17 +37,13 @@ with sync_playwright() as playwright:
     #PUT THE IRL OF THE FIRST VIDEO HERE
     page.goto("https://lms.ptit.edu.vn/courses/course-v1:PTIT+TLCD+20261/join?lessonId=block-v1%3APTIT%2BTLCD%2B20261%2Btype%40vertical%2Bblock%4040e3f65ae9494c628e5bb6a46a80c157")
 
-    #expand all chapters first
-    for i in range(1,len(chapt)):
-        if i <= 5:
-            page.get_by_title(chapt[i]).click()
-        else:
-            page.get_by_role("button", name=chapt[i]).click()
-
     #autocomplete
     for i in range(len(chapt)):
         if i <= 5:
             element = page.get_by_title(chapt[i])
+            if i != 0:
+                element.click()
+                #time.sleep(0.5)
             lecture_block = element.locator("../../../../../..").locator(":scope > *").nth(1) #parent block is 6 indents above, get the container with the lectures
             lectures = lecture_block.locator(":scope > * > * > *") #should point towards every single lecture (if im not totally braindead)
             print(lectures.count())
