@@ -15,7 +15,11 @@ chapt = ["Bài giảng 1: Công tác sinh viên",
          "Bài giảng 3: Quy định Khảo thí và Đảm bảo chất lượng giáo dục",
          "Bài giảng 4: Quy định sử dụng thư viện",
          "Nội dung 1 (trực tiếp sáng thứ Ba ngày 25/8/2026)",
-         "Nội dung 2 (trực tiếp chiều thứ Ba ngày 25/8/2026)",]
+         "Nội dung 2 (trực tiếp chiều thứ Ba ngày 25/8/2026)",
+         "Nội dung 3 (trực tiếp sáng thứ Tư ngày 26/8/2026)",
+         "Nội dung 4 (trực tiếp chiều thứ Tư ngày 26/8/2026)",
+         "Nội dung 5 (trực tiếp sáng thứ Năm ngày 27/8/2026)",
+         "Nội dung 6 (trực tiếp chiều thứ Năm ngày 27/8/2026)"]
 
          #these are special ones, the lectures have the same name, so i can only use get_by_role("button", name="{name}")
          #"Chuyên đề 3: Công tác sinh viên và kỹ năng quản lý tài chính cá nhân",
@@ -39,9 +43,10 @@ with sync_playwright() as playwright:
 
     #autocomplete
     for i in range(len(chapt)):
-        if i <= 5:
+        if i <= 9:
             element = page.get_by_title(chapt[i])
             if i != 0:
+                print("clicking",chapt[i])
                 element.click()
                 #time.sleep(0.5)
             lecture_block = element.locator("../../../../../..").locator(":scope > *").nth(1) #parent block is 6 indents above, get the container with the lectures
@@ -55,13 +60,12 @@ with sync_playwright() as playwright:
                     continue
                 else:
                     play_btn = page.locator("button.plyr__control--overlaid")
-                    if speed != 1:
-                        settings = play_btn.locator("..").locator(":scope > *").nth(0).locator(":scope > *").nth(6).locator(":scope > *").nth(0)
-                        speed_menu = settings.locator("..").locator(":scope > *").nth(1).locator(":scope > * > *").nth(0).locator(":scope > * > *").nth(2)
+                    settings = play_btn.locator("..").locator(":scope > *").nth(0).locator(":scope > *").nth(6).locator(":scope > *").nth(0)
+                    speed_menu = settings.locator("..").locator(":scope > *").nth(1).locator(":scope > * > *").nth(0).locator(":scope > * > *").nth(2)
 
-                        settings.click()
-                        speed_menu.click()
-                        page.locator(f'button.plyr__control[data-plyr="speed"][value="{playback_speed[speed]}"]').click()
+                    settings.click()
+                    speed_menu.click()
+                    page.locator(f'button.plyr__control[data-plyr="speed"][value="{playback_speed[speed]}"]').click()
                     
                     play_btn.click()
 
