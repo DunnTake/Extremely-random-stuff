@@ -1,3 +1,6 @@
+// A. The 67th Integer Problem
+// https://codeforces.com/problemset/problem/2218/A
+
 #include <iostream>
 using namespace std;
 

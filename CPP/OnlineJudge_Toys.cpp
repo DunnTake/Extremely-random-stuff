@@ -1,3 +1,6 @@
+// Beginner Free Contest 52 - TOYS
+// https://oj.vnoi.info/problem/fcb052_toys
+
 #include <bits/stdc++.h>
 #define int long long
 using namespace std;

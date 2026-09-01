@@ -1,3 +1,6 @@
+// Bedao Mini Contest 21 - Bút chì
+// https://oj.vnoi.info/problem/bedao_m21_a
+
 #include <iostream>
 using namespace std;
 
